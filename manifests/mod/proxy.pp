@@ -7,10 +7,10 @@ class apache::mod::proxy (
   # Template uses $proxy_requests, $apache_version
   file { 'proxy.conf':
     ensure  => file,
-    path    => "${::apache::mod_dir}/proxy.conf",
+    path    => "/etc/httpd/conf.d/proxy.conf",
     content => template('apache/mod/proxy.conf.erb'),
-    require => Exec["mkdir ${::apache::mod_dir}"],
-    before  => File[$::apache::mod_dir],
+    require => Exec["mkdir /etc/httpd/conf.d"],
+    before  => File['/etc/httpd/conf.d'],
     notify  => Class['apache::service'],
   }
 }
