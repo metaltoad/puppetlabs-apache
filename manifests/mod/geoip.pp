@@ -21,10 +21,10 @@ class apache::mod::geoip (
   # - use_last_xforwarededfor_ip
   file { 'geoip.conf':
     ensure  => file,
-    path    => "${::apache::mod_dir}/geoip.conf",
+    path    => "/etc/httpd/conf.d/geoip.conf",
     content => template('apache/mod/geoip.conf.erb'),
-    require => Exec["mkdir ${::apache::mod_dir}"],
-    before  => File[$::apache::mod_dir],
+    require => Exec['mkdir /etc/httpd/conf.d'],
+    before  => File['/etc/httpd/conf.d'],
     notify  => Class['apache::service'],
   }
 
